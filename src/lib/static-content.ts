@@ -29,6 +29,12 @@ export type ArticleSummary = Readonly<{
   bodyBlocks: string[];
 }>;
 
+export type FaqSummary = Readonly<{
+  question: string;
+  answer: string;
+  category: string;
+}>;
+
 export const services: ServiceSummary[] = [
   {
     title: "Primary Care",
@@ -157,17 +163,23 @@ export const articles: ArticleSummary[] = [
   },
 ];
 
-export const faqs: SummaryCard[] = [
+export const faqs: FaqSummary[] = [
   {
-    title: "Can I request an appointment online?",
-    text: "Yes. The static form shell is ready and will gain stronger behavior in a later milestone.",
+    question: "Can I request an appointment online?",
+    answer:
+      "Yes. The appointment request form validates required details and shows a confirmation message without storing information.",
+    category: "Appointments",
   },
   {
-    title: "Is this connected to Contentful yet?",
-    text: "Not yet. This milestone keeps content static so the design system is easy to review first.",
+    question: "Is FAQ content connected to Contentful?",
+    answer:
+      "Yes. FAQ items can load from Contentful, and safe starter questions appear when CMS entries are unavailable.",
+    category: "Content",
   },
   {
-    title: "Will pages become CMS-driven later?",
-    text: "Yes. Services, providers, articles, FAQ items, and SEO content will connect to Contentful in later milestones.",
+    question: "Which content is CMS-driven now?",
+    answer:
+      "The site supports CMS-driven home, services, providers, articles, resources, and FAQ content.",
+    category: "Content",
   },
 ];

@@ -16,6 +16,12 @@ export {
   getHomePageContent,
 } from "@/lib/contentful/home";
 export {
+  fallbackFaqContent,
+  getFaqs,
+  getFaqSections,
+  groupFaqsByCategory,
+} from "@/lib/contentful/faqs";
+export {
   fallbackArticleContent,
   getArticleBySlug,
   getArticleSlugs,
@@ -45,6 +51,7 @@ export type {
 } from "@/lib/contentful/content-model";
 export type { ContentfulEnvironmentConfig } from "@/lib/contentful/env";
 export type { ArticleContent } from "@/lib/contentful/articles";
+export type { FaqContent, FaqSection } from "@/lib/contentful/faqs";
 export type { HomePageContent } from "@/lib/contentful/home";
 export type { PageContent } from "@/lib/contentful/pages";
 export type { ProviderContent } from "@/lib/contentful/providers";
