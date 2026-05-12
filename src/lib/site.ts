@@ -12,6 +12,10 @@ export const siteConfig = {
   address: "1200 Harbor Way, Suite 210, Brookside, CA",
 };
 
+export function getSiteUrl() {
+  return process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+}
+
 export const navItems: NavItem[] = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },

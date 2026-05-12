@@ -3,18 +3,53 @@ export type SummaryCard = Readonly<{
   text: string;
 }>;
 
-export const services: SummaryCard[] = [
+export type ServiceSummary = Readonly<{
+  title: string;
+  slug: string;
+  summary: string;
+  detailText: string;
+  careHighlights: string[];
+}>;
+
+export const services: ServiceSummary[] = [
   {
     title: "Primary Care",
-    text: "Everyday visits, ongoing care plans, and clear next steps for common health needs.",
+    slug: "primary-care",
+    summary:
+      "Everyday visits, ongoing care plans, and clear next steps for common health needs.",
+    detailText:
+      "Primary care visits help patients talk through current concerns, review health history, and plan practical next steps with a trusted clinic team.",
+    careHighlights: [
+      "Routine visits",
+      "Health history review",
+      "Ongoing care planning",
+    ],
   },
   {
     title: "Preventive Visits",
-    text: "Annual checkups, screenings, and wellness conversations for each stage of life.",
+    slug: "preventive-visits",
+    summary:
+      "Annual checkups, screenings, and wellness conversations for each stage of life.",
+    detailText:
+      "Preventive visits create time for screening conversations, wellness goals, and early questions before small concerns become harder to manage.",
+    careHighlights: [
+      "Annual checkups",
+      "Screening conversations",
+      "Wellness planning",
+    ],
   },
   {
     title: "Care Coordination",
-    text: "Support for referrals, follow-up visits, and communication across care needs.",
+    slug: "care-coordination",
+    summary:
+      "Support for referrals, follow-up visits, and communication across care needs.",
+    detailText:
+      "Care coordination helps patients understand referrals, follow-up timing, and the information needed for connected care conversations.",
+    careHighlights: [
+      "Referral support",
+      "Follow-up planning",
+      "Care communication",
+    ],
   },
 ];
 
