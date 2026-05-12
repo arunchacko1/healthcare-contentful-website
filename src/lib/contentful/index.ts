@@ -21,6 +21,12 @@ export {
   getServiceSlugs,
   getServices,
 } from "@/lib/contentful/services";
+export {
+  fallbackProviderContent,
+  getProviderBySlug,
+  getProviderSlugs,
+  getProviders,
+} from "@/lib/contentful/providers";
 export type {
   ContentfulContentTypePlan,
   ContentfulFieldPlan,
@@ -28,6 +34,7 @@ export type {
 } from "@/lib/contentful/content-model";
 export type { ContentfulEnvironmentConfig } from "@/lib/contentful/env";
 export type { HomePageContent } from "@/lib/contentful/home";
+export type { ProviderContent } from "@/lib/contentful/providers";
 export type { ServiceContent } from "@/lib/contentful/services";
 export type {
   CmsArticle,

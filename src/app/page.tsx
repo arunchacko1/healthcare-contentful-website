@@ -100,12 +100,12 @@ export default async function Home() {
           </div>
           <div className="grid gap-5 sm:grid-cols-2">
             {providers.slice(0, 2).map((provider) => (
-              <Card key={provider.title}>
+              <Card key={provider.name}>
                 <h3 className="text-xl font-semibold text-slate-950">
-                  {provider.title}
+                  {provider.name}
                 </h3>
                 <p className="mt-3 leading-7 text-slate-600">
-                  {provider.text}
+                  {provider.summary}
                 </p>
               </Card>
             ))}

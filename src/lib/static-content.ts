@@ -11,6 +11,15 @@ export type ServiceSummary = Readonly<{
   careHighlights: string[];
 }>;
 
+export type ProviderSummary = Readonly<{
+  name: string;
+  slug: string;
+  role: string;
+  summary: string;
+  specialties: string[];
+  bioText: string;
+}>;
+
 export const services: ServiceSummary[] = [
   {
     title: "Primary Care",
@@ -53,18 +62,36 @@ export const services: ServiceSummary[] = [
   },
 ];
 
-export const providers: SummaryCard[] = [
+export const providers: ProviderSummary[] = [
   {
-    title: "Dr. Lena Morris",
-    text: "Family medicine physician focused on practical prevention and long-term relationships.",
+    name: "Dr. Lena Morris",
+    slug: "lena-morris",
+    role: "Family Medicine Physician",
+    summary:
+      "Family medicine physician focused on practical prevention and long-term relationships.",
+    specialties: ["Primary care", "Preventive visits", "Care planning"],
+    bioText:
+      "Dr. Lena Morris takes a steady, practical approach to family medicine. Her fictional profile highlights clear explanations, prevention conversations, and care plans that feel manageable for patients.",
   },
   {
-    title: "Nora Patel, PA-C",
-    text: "Primary care clinician supporting acute visits, checkups, and education.",
+    name: "Nora Patel, PA-C",
+    slug: "nora-patel",
+    role: "Primary Care Clinician",
+    summary:
+      "Primary care clinician supporting acute visits, checkups, and education.",
+    specialties: ["Same-week visits", "Patient education", "Wellness support"],
+    bioText:
+      "Nora Patel supports fictional clinic visits with a calm, detail-oriented style. Her profile is designed for future CMS content that explains areas of care focus in plain language.",
   },
   {
-    title: "Marcus Lee, FNP",
-    text: "Nurse practitioner with a calm approach to chronic care conversations.",
+    name: "Marcus Lee, FNP",
+    slug: "marcus-lee",
+    role: "Family Nurse Practitioner",
+    summary:
+      "Nurse practitioner with a calm approach to chronic care conversations.",
+    specialties: ["Follow-up care", "Chronic care support", "Care coordination"],
+    bioText:
+      "Marcus Lee helps patients understand follow-up steps and ongoing care needs. This fictional profile keeps the tone warm, specific, and easy to adapt when Contentful entries are added.",
   },
 ];
 
