@@ -89,6 +89,30 @@ Milestone 8 adds FAQ and appointment request behavior:
 - Success and error states
 - No submitted data storage
 
+## Milestone 9 Scope
+
+Milestone 9 adds the final SEO, schema, accessibility, and performance pass:
+
+- Shared metadata helpers
+- JSON-LD helpers for clinic, service, provider, article, FAQ, and breadcrumbs
+- Skip link and stable main content target
+- Current-page navigation state
+- Provider image optimization settings
+- Hourly ISR cadence for CMS-backed pages
+
+## Milestone 10 Scope
+
+Milestone 10 prepares the project for handoff and deployment:
+
+- CMS setup guide
+- Content model guide
+- Local development guide
+- Deployment guide
+- Environment variable guide
+- Troubleshooting guide
+- Handoff-ready README
+- Final review notes and quiz questions
+
 ## Development Principles
 
 - Keep components small and readable.
