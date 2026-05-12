@@ -9,9 +9,9 @@ import { Section } from "@/components/ui/section";
 import {
   getProviderBySlug,
   getProviderSlugs,
-  type ProviderContent,
 } from "@/lib/contentful";
-import { getSiteUrl, siteConfig } from "@/lib/site";
+import { buildMetadataFromSeo } from "@/lib/metadata";
+import { createBreadcrumbJsonLd, createProviderJsonLd } from "@/lib/schema";
 
 type ProviderPageProps = Readonly<{
   params: Promise<{
@@ -38,12 +38,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: provider.seo.title,
-    description: provider.seo.description,
-    robots: provider.seo.noIndex ? { index: false, follow: false } : undefined,
-    alternates: {
-      canonical: provider.seo.canonicalPath,
-    },
+    ...buildMetadataFromSeo(provider.seo),
   };
 }
 
@@ -59,7 +54,16 @@ export default async function ProviderProfilePage({
 
   return (
     <>
-      <JsonLd data={createProviderJsonLd(provider)} />
+      <JsonLd
+        data={[
+          createProviderJsonLd(provider),
+          createBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Providers", path: "/providers" },
+            { name: provider.name, path: `/providers/${provider.slug}` },
+          ]),
+        ]}
+      />
       <section className="bg-teal-50 py-16 sm:py-20">
         <Container>
           <div className="grid gap-8 lg:grid-cols-[auto_1fr] lg:items-center">
@@ -129,28 +133,4 @@ export default async function ProviderProfilePage({
       </Section>
     </>
   );
-}
-
-function createProviderJsonLd(provider: ProviderContent) {
-  const siteUrl = getSiteUrl();
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    name: provider.name,
-    description: provider.summary,
-    url: `${siteUrl}/providers/${provider.slug}`,
-    image: provider.image?.url,
-    hasOccupation: {
-      "@type": "Occupation",
-      name: provider.role,
-    },
-    knowsAbout: provider.specialties,
-    worksFor: {
-      "@type": "MedicalOrganization",
-      name: siteConfig.name,
-      address: siteConfig.address,
-      telephone: siteConfig.phone,
-    },
-  };
 }

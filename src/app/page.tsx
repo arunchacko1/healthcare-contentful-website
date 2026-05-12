@@ -3,14 +3,29 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
+import { JsonLd } from "@/components/seo/json-ld";
 import { getHomePageContent } from "@/lib/contentful";
+import { buildMetadataFromSeo } from "@/lib/metadata";
+import { createBreadcrumbJsonLd, createClinicJsonLd } from "@/lib/schema";
 import { articles, providers, services } from "@/lib/static-content";
+
+export async function generateMetadata() {
+  const homePageContent = await getHomePageContent();
+
+  return buildMetadataFromSeo(homePageContent.seo);
+}
 
 export default async function Home() {
   const homePageContent = await getHomePageContent();
 
   return (
     <>
+      <JsonLd
+        data={[
+          createClinicJsonLd(),
+          createBreadcrumbJsonLd([{ name: "Home", path: "/" }]),
+        ]}
+      />
       <section className="bg-teal-50 py-16 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>

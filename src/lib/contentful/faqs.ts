@@ -1,4 +1,5 @@
 import type { Entry, EntryFieldTypes, EntrySkeletonType } from "contentful";
+import { cache } from "react";
 import { getContentfulClient } from "@/lib/contentful/client";
 import { textOrFallback } from "@/lib/contentful/fallbacks";
 import { createRichTextDocumentFromParagraphs } from "@/lib/contentful/rich-text-document";
@@ -70,7 +71,7 @@ export function groupFaqsByCategory(items: FaqContent[]): FaqSection[] {
   }));
 }
 
-export async function getFaqs(): Promise<FaqContent[]> {
+export const getFaqs = cache(async function getFaqs(): Promise<FaqContent[]> {
   const client = getContentfulClient();
 
   if (!client) {
@@ -90,7 +91,7 @@ export async function getFaqs(): Promise<FaqContent[]> {
     console.error("Unable to load Contentful FAQ items.", error);
     return fallbackFaqContent;
   }
-}
+});
 
 export async function getFaqSections() {
   const items = await getFaqs();

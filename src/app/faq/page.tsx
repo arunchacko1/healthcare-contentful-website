@@ -1,14 +1,18 @@
 import type { Metadata } from "next";
 import { RichTextRenderer } from "@/components/content/rich-text-renderer";
 import { PageHero } from "@/components/page/page-hero";
+import { JsonLd } from "@/components/seo/json-ld";
 import { Section } from "@/components/ui/section";
 import { getFaqSections } from "@/lib/contentful";
+import { buildPageMetadata } from "@/lib/metadata";
+import { createBreadcrumbJsonLd, createFaqJsonLd } from "@/lib/schema";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "FAQ",
   description:
     "Find answers to common fictional clinic questions from CMS-driven FAQ sections.",
-};
+  canonicalPath: "/faq",
+});
 
 export default async function FaqPage() {
   const faqSections = await getFaqSections();
@@ -18,6 +22,15 @@ export default async function FaqPage() {
 
   return (
     <>
+      <JsonLd
+        data={[
+          createFaqJsonLd(faqSections.flatMap((section) => section.items)),
+          createBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "FAQ", path: "/faq" },
+          ]),
+        ]}
+      />
       <PageHero
         eyebrow="FAQ"
         title="Answers to common questions"

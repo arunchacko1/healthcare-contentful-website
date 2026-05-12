@@ -8,9 +8,9 @@ import { Section } from "@/components/ui/section";
 import {
   getServiceBySlug,
   getServiceSlugs,
-  type ServiceContent,
 } from "@/lib/contentful";
-import { getSiteUrl, siteConfig } from "@/lib/site";
+import { buildMetadataFromSeo } from "@/lib/metadata";
+import { createBreadcrumbJsonLd, createServiceJsonLd } from "@/lib/schema";
 
 type ServicePageProps = Readonly<{
   params: Promise<{
@@ -37,12 +37,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: service.seo.title,
-    description: service.seo.description,
-    robots: service.seo.noIndex ? { index: false, follow: false } : undefined,
-    alternates: {
-      canonical: service.seo.canonicalPath,
-    },
+    ...buildMetadataFromSeo(service.seo),
   };
 }
 
@@ -56,7 +51,16 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
 
   return (
     <>
-      <JsonLd data={createMedicalServiceJsonLd(service)} />
+      <JsonLd
+        data={[
+          createServiceJsonLd(service),
+          createBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Services", path: "/services" },
+            { name: service.title, path: `/services/${service.slug}` },
+          ]),
+        ]}
+      />
       <section className="bg-teal-50 py-16 sm:py-20">
         <Container>
           <div className="max-w-3xl">
@@ -116,22 +120,4 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
       </Section>
     </>
   );
-}
-
-function createMedicalServiceJsonLd(service: ServiceContent) {
-  const siteUrl = getSiteUrl();
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "MedicalService",
-    name: service.title,
-    description: service.summary,
-    url: `${siteUrl}/services/${service.slug}`,
-    provider: {
-      "@type": "MedicalOrganization",
-      name: siteConfig.name,
-      address: siteConfig.address,
-      telephone: siteConfig.phone,
-    },
-  };
 }

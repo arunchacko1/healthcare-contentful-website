@@ -111,13 +111,16 @@ export function AppointmentRequestForm() {
       ) : null}
 
       {formStatus === "error" ? (
-        <p className="rounded-md bg-red-50 p-3 text-sm leading-6 text-red-800" role="alert">
+        <p
+          className="rounded-md bg-red-50 p-3 text-sm leading-6 text-red-800"
+          role="alert"
+        >
           Please review the highlighted fields before sending the request.
         </p>
       ) : null}
 
       <button
-        className="min-h-11 rounded-md bg-teal-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-teal-800"
+        className="min-h-11 rounded-md bg-teal-700 px-5 py-3 text-sm font-semibold text-white transition hover:bg-teal-800 focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-3 focus-visible:outline-teal-700"
         type="submit"
       >
         Send Request

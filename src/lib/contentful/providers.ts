@@ -1,4 +1,5 @@
 import type { Asset, Entry, EntryFieldTypes, EntrySkeletonType } from "contentful";
+import { cache } from "react";
 import { getContentfulClient } from "@/lib/contentful/client";
 import {
   listOrFallback,
@@ -176,7 +177,9 @@ function fieldStringList(value: unknown) {
     : undefined;
 }
 
-export async function getProviders(): Promise<ProviderContent[]> {
+export const getProviders = cache(async function getProviders(): Promise<
+  ProviderContent[]
+> {
   const client = getContentfulClient();
 
   if (!client) {
@@ -197,7 +200,7 @@ export async function getProviders(): Promise<ProviderContent[]> {
     console.error("Unable to load Contentful providers.", error);
     return fallbackProviderContent;
   }
-}
+});
 
 export async function getProviderBySlug(slug: string) {
   const providers = await getProviders();

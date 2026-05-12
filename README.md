@@ -6,7 +6,10 @@ The project is built in small milestones. Each milestone adds a focused layer of
 
 ## Current Milestone
 
-Milestone 1: Project foundation.
+Milestone 9: SEO, schema, accessibility, and performance pass.
+
+See `docs/milestone-9-seo-schema-a11y-performance.md` for implementation
+notes, review guidance, and quiz questions.
 
 ## Scripts
 

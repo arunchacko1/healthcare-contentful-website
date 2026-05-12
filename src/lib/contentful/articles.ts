@@ -1,4 +1,5 @@
 import type { Entry, EntryFieldTypes, EntrySkeletonType } from "contentful";
+import { cache } from "react";
 import { getContentfulClient } from "@/lib/contentful/client";
 import {
   seoOrFallback,
@@ -124,7 +125,9 @@ function fieldBoolean(value: unknown) {
   return typeof value === "boolean" ? value : undefined;
 }
 
-export async function getArticles(): Promise<ArticleContent[]> {
+export const getArticles = cache(async function getArticles(): Promise<
+  ArticleContent[]
+> {
   const client = getContentfulClient();
 
   if (!client) {
@@ -146,7 +149,7 @@ export async function getArticles(): Promise<ArticleContent[]> {
     console.error("Unable to load Contentful articles.", error);
     return fallbackArticleContent;
   }
-}
+});
 
 export async function getArticleBySlug(slug: string) {
   const articles = await getArticles();

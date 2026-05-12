@@ -1,4 +1,5 @@
 import type { Entry, EntryFieldTypes, EntrySkeletonType } from "contentful";
+import { cache } from "react";
 import { getContentfulClient } from "@/lib/contentful/client";
 import {
   listOrFallback,
@@ -120,7 +121,9 @@ function fieldStringList(value: unknown) {
     : undefined;
 }
 
-export async function getServices(): Promise<ServiceContent[]> {
+export const getServices = cache(async function getServices(): Promise<
+  ServiceContent[]
+> {
   const client = getContentfulClient();
 
   if (!client) {
@@ -141,7 +144,7 @@ export async function getServices(): Promise<ServiceContent[]> {
     console.error("Unable to load Contentful services.", error);
     return fallbackServiceContent;
   }
-}
+});
 
 export async function getServiceBySlug(slug: string) {
   const services = await getServices();

@@ -4,12 +4,13 @@ import { PageHero } from "@/components/page/page-hero";
 import { Card } from "@/components/ui/card";
 import { Section } from "@/components/ui/section";
 import { getArticles } from "@/lib/contentful";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Articles",
-  description:
-    "Read fictional clinic articles prepared for Contentful publishing.",
-};
+  description: "Read fictional clinic articles prepared for Contentful publishing.",
+  canonicalPath: "/blog",
+});
 
 export default async function BlogPage() {
   const articles = await getArticles();

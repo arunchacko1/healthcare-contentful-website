@@ -2,11 +2,30 @@ import { PageHero } from "@/components/page/page-hero";
 import { AppointmentRequestForm } from "@/components/forms/appointment-request-form";
 import { Card } from "@/components/ui/card";
 import { Section } from "@/components/ui/section";
+import { JsonLd } from "@/components/seo/json-ld";
+import { buildPageMetadata } from "@/lib/metadata";
+import { createBreadcrumbJsonLd, createClinicJsonLd } from "@/lib/schema";
 import { siteConfig } from "@/lib/site";
+
+export const metadata = buildPageMetadata({
+  title: "Contact",
+  description:
+    "Request a fictional appointment with Everwell Family Clinic and review clinic contact details.",
+  canonicalPath: "/contact",
+});
 
 export default function ContactPage() {
   return (
     <>
+      <JsonLd
+        data={[
+          createClinicJsonLd(),
+          createBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Contact", path: "/contact" },
+          ]),
+        ]}
+      />
       <PageHero
         eyebrow="Contact"
         title="Request an appointment"

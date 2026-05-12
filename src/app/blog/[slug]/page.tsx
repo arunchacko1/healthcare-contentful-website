@@ -8,9 +8,9 @@ import { Section } from "@/components/ui/section";
 import {
   getArticleBySlug,
   getArticleSlugs,
-  type ArticleContent,
 } from "@/lib/contentful";
-import { getSiteUrl, siteConfig } from "@/lib/site";
+import { buildMetadataFromSeo } from "@/lib/metadata";
+import { createArticleJsonLd, createBreadcrumbJsonLd } from "@/lib/schema";
 
 type ArticlePageProps = Readonly<{
   params: Promise<{
@@ -37,12 +37,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: article.seo.title,
-    description: article.seo.description,
-    robots: article.seo.noIndex ? { index: false, follow: false } : undefined,
-    alternates: {
-      canonical: article.seo.canonicalPath,
-    },
+    ...buildMetadataFromSeo(article.seo),
   };
 }
 
@@ -56,7 +51,16 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
   return (
     <>
-      <JsonLd data={createArticleJsonLd(article)} />
+      <JsonLd
+        data={[
+          createArticleJsonLd(article),
+          createBreadcrumbJsonLd([
+            { name: "Home", path: "/" },
+            { name: "Articles", path: "/blog" },
+            { name: article.title, path: `/blog/${article.slug}` },
+          ]),
+        ]}
+      />
       <section className="bg-teal-50 py-16 sm:py-20">
         <Container>
           <div className="max-w-3xl">
@@ -90,28 +94,6 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
       </Section>
     </>
   );
-}
-
-function createArticleJsonLd(article: ArticleContent) {
-  const siteUrl = getSiteUrl();
-
-  return {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    headline: article.title,
-    description: article.excerpt,
-    datePublished: article.publishedDate,
-    author: {
-      "@type": "Organization",
-      name: article.authorName ?? siteConfig.name,
-    },
-    publisher: {
-      "@type": "MedicalOrganization",
-      name: siteConfig.name,
-      telephone: siteConfig.phone,
-    },
-    mainEntityOfPage: `${siteUrl}/blog/${article.slug}`,
-  };
 }
 
 function formatDisplayDate(value: string) {

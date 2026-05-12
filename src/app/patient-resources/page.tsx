@@ -5,18 +5,12 @@ import { PageHero } from "@/components/page/page-hero";
 import { Card } from "@/components/ui/card";
 import { Section } from "@/components/ui/section";
 import { getArticles, getPatientResourcesPage } from "@/lib/contentful";
+import { buildMetadataFromSeo } from "@/lib/metadata";
 
 export async function generateMetadata(): Promise<Metadata> {
   const page = await getPatientResourcesPage();
 
-  return {
-    title: page.seo.title,
-    description: page.seo.description,
-    robots: page.seo.noIndex ? { index: false, follow: false } : undefined,
-    alternates: {
-      canonical: page.seo.canonicalPath,
-    },
-  };
+  return buildMetadataFromSeo(page.seo);
 }
 
 export default async function PatientResourcesPage() {

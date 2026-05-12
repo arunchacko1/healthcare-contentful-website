@@ -30,6 +30,7 @@ export function ProviderAvatar({
         alt={image.description || `${name} profile photo`}
         className={`${sizeClasses[size]} rounded-full object-cover`}
         height={pixelSize}
+        sizes={`${pixelSize}px`}
         src={image.url}
         width={pixelSize}
       />

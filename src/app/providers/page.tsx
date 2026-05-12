@@ -5,12 +5,13 @@ import { ProviderAvatar } from "@/components/providers/provider-avatar";
 import { Card } from "@/components/ui/card";
 import { Section } from "@/components/ui/section";
 import { getProviders } from "@/lib/contentful";
+import { buildPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildPageMetadata({
   title: "Providers",
-  description:
-    "Meet the fictional care team at Everwell Family Clinic.",
-};
+  description: "Meet the fictional care team at Everwell Family Clinic.",
+  canonicalPath: "/providers",
+});
 
 export default async function ProvidersPage() {
   const providers = await getProviders();
