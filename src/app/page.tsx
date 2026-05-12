@@ -3,22 +3,23 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Container } from "@/components/ui/container";
 import { Section } from "@/components/ui/section";
+import { getHomePageContent } from "@/lib/contentful";
 import { articles, providers, services } from "@/lib/static-content";
 
-export default function Home() {
+export default async function Home() {
+  const homePageContent = await getHomePageContent();
+
   return (
     <>
       <section className="bg-teal-50 py-16 sm:py-24">
         <Container className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
-            <Badge>Fictional family clinic</Badge>
+            <Badge>{homePageContent.eyebrow}</Badge>
             <h1 className="mt-5 text-4xl font-bold text-slate-950 sm:text-6xl">
-              Thoughtful care, clearly explained.
+              {homePageContent.heroTitle}
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-700">
-              Everwell Family Clinic is a polished static foundation for a
-              CMS-driven healthcare website, with calm page structure,
-              accessible controls, and reusable React components.
+              {homePageContent.heroText}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Button href="/contact">Request Appointment</Button>
@@ -49,6 +50,12 @@ export default function Home() {
                 </dd>
               </div>
             </dl>
+            {homePageContent.source === "fallback" ? (
+              <p className="mt-6 rounded-md bg-teal-50 p-3 text-sm leading-6 text-teal-900">
+                Showing safe starter content until Contentful credentials and a
+                Home page entry are available.
+              </p>
+            ) : null}
           </div>
         </Container>
       </section>
