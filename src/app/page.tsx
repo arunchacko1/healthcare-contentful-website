@@ -126,7 +126,9 @@ export default async function Home() {
               <h3 className="text-xl font-semibold text-slate-950">
                 {article.title}
               </h3>
-              <p className="mt-3 leading-7 text-slate-600">{article.text}</p>
+              <p className="mt-3 leading-7 text-slate-600">
+                {article.excerpt}
+              </p>
             </Card>
           ))}
         </div>

@@ -20,6 +20,15 @@ export type ProviderSummary = Readonly<{
   bioText: string;
 }>;
 
+export type ArticleSummary = Readonly<{
+  title: string;
+  slug: string;
+  excerpt: string;
+  publishedDate: string;
+  authorName: string;
+  bodyBlocks: string[];
+}>;
+
 export const services: ServiceSummary[] = [
   {
     title: "Primary Care",
@@ -110,18 +119,41 @@ export const resources: SummaryCard[] = [
   },
 ];
 
-export const articles: SummaryCard[] = [
+export const articles: ArticleSummary[] = [
   {
     title: "Making Preventive Care Easier To Plan",
-    text: "A short guide to turning annual visits into useful health conversations.",
+    slug: "making-preventive-care-easier-to-plan",
+    excerpt:
+      "A short guide to turning annual visits into useful health conversations.",
+    publishedDate: "2026-05-11",
+    authorName: "Everwell Care Team",
+    bodyBlocks: [
+      "Preventive care is easier to plan when patients know what they want to discuss before a visit begins.",
+      "A simple list of questions, recent changes, and care goals can help the conversation stay focused and useful.",
+    ],
   },
   {
     title: "Questions To Bring To A Primary Care Visit",
-    text: "Helpful prompts for making the most of a clinic appointment.",
+    slug: "questions-to-bring-to-a-primary-care-visit",
+    excerpt: "Helpful prompts for making the most of a clinic appointment.",
+    publishedDate: "2026-05-12",
+    authorName: "Everwell Care Team",
+    bodyBlocks: [
+      "Primary care visits work best when patients feel prepared to describe symptoms, goals, and concerns in their own words.",
+      "Useful questions can cover medications, follow-up timing, lifestyle changes, and what signs should prompt another visit.",
+    ],
   },
   {
     title: "Understanding Follow-Up Care",
-    text: "What follow-up visits can clarify and how they support continuity.",
+    slug: "understanding-follow-up-care",
+    excerpt:
+      "What follow-up visits can clarify and how they support continuity.",
+    publishedDate: "2026-05-13",
+    authorName: "Everwell Care Team",
+    bodyBlocks: [
+      "Follow-up care gives patients and clinicians time to review progress, clarify next steps, and adjust care plans when needed.",
+      "These visits can be especially helpful when several questions or care needs connect across time.",
+    ],
   },
 ];
 
